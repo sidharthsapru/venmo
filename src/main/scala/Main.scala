@@ -24,6 +24,14 @@ object Main extends App {
       case "listAll" => val id = p(1)
       PaymentLedger.get(id)
 
+      case "bankTransfer" => val id = p(1)
+      val amount = p(2).toLong
+      for {
+        _ <- Wallet.bankTransfer(id, x => Right(amount))
+      } yield {
+        ()
+      }
+
       case _ => "not yet supported"
     }
   }
